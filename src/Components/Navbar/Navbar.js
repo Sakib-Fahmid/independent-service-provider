@@ -29,7 +29,7 @@ const Navbar = () => {
                             </li>
                             <li className="nav-item">
                                 {
-                                    user ? <Link className="nav-link" to="/login">Logout</Link> :
+                                    user ? <Link className="nav-link" to="/logout">Logout</Link> :
                                         <Link className="nav-link" to="/login">Login</Link>
                                 }
 
