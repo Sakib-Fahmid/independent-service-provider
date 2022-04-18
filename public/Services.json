@@ -1,0 +1,23 @@
+[
+    {
+      "id": "625d7a426f6f86b37ca0c712",
+      "name": "Apply to Best German Universities",
+      "price": "100$",
+      "image": "https://i.ibb.co/5nxvrRk/study-min.jpg",
+      "description": "I myself also studying masters in Germany. So I know the ins and outs of getting offer letter. I would love to help you out on getting one too."
+    },
+    {
+      "id": "625d7a4244a84569773491e8",
+      "name": "Learn German With Me",
+      "price": "$200",
+      "image": "https://i.ibb.co/f9j0SmR/german-min.jpg",
+      "description": "I have passed successfully from Goethe Institute with CEFR level C2 . I would enjoy to share my experience with you as well."
+    },
+    {
+      "id": "625d7a4234c7606337fc7d53",
+      "name": "Apply for German Visa",
+      "price": "$50",
+      "image": "https://i.ibb.co/3YH1H7P/visa-min.jpg",
+      "description": "Apply to your local German Consulate with my help"
+    }
+  ]
