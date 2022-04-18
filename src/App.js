@@ -5,6 +5,7 @@ import Footer from './Components/Footer/Footer';
 import Home from './Components/Home/Home';
 import Helmet from 'react-helmet';
 import Login from './Components/Login/Login';
+import Notfound from './Components/Notfound/Notfound';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
+        <Route path='*' element={<Notfound></Notfound>}></Route>
       </Routes>
       <Footer></Footer>
     </>
