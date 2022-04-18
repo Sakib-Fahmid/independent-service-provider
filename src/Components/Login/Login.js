@@ -1,43 +1,74 @@
-import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import auth from '../../firebase.init'
+import React, { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import auth from '../../firebase.init';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import './Login.css';
+import { FaGoogle } from 'react-icons/fa';
 
 const Login = () => {
-    const [signInWithGoogle,
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/orders';
+
+    const [
+        signInWithEmailAndPassword,
         user,
         loading,
         error
-    ] = useSignInWithGoogle(auth);
-    const navigate = useNavigate();
-    const location = useLocation();
+    ] = useSignInWithEmailAndPassword(auth);
 
-    const from = location?.state?.from?.pathname || '/';
-
-    const handleGoogleSignIn = () => {
-        signInWithGoogle()
-            .then(user => {
-                navigate(from, { replace: true })
-            })
-            .catch(error => console.error(error))
+    const handleEmailBlur = e => {
+        setEmail(e.target.value);
     }
 
+    const handlePasswordBlur = e => {
+        setPassword(e.target.value);
+    }
 
-    // useEffect(() => {
-    //     if (user) {
-    //         navigate("/orders");
-    //     }
-    // }, [user, navigate])
+    const handleLoginSubmit = e => {
+        e.preventDefault();
+        signInWithEmailAndPassword(email, password);
+    }
+
+    if (user) {
+        navigate(from, { replace: true });
+    }
 
     return (
-        <div>
-            <h1>Log In</h1>
-            <input onClick={handleGoogleSignIn} style={{ 'marginBottom': '10px' }} type="submit" value="Google Sign In" />
-            <br />
-            <input type="email" name="email" id="user-email" placeholder='Type your mail' />
-            <br />
-            <input type="password" name="password" id="user-password" placeholder='Type password' />
-            <br />
-            <input type="submit" value="Sign In" />
+        <div className='form-container'>
+            <div>
+                <h1 className='login-form-title'>Login</h1>
+                <form onSubmit={handleLoginSubmit} >
+                    <div className='input-group'>
+                        <label className='label-input' htmlFor="email">Email</label>
+                        <br></br>
+                        <input onBlur={handleEmailBlur} className='input-field' type="email" name="email" id="" required />
+                    </div>
+                    <div>
+                        <label className='label-input' htmlFor="password">Password</label>
+                        <br />
+                        <input onBlur={handlePasswordBlur} className='input-field' type="password" name="password" id="" required />
+                    </div>
+                    <p style={{ 'color': 'red' }} >{error?.message}</p>
+                    {loading && <p>Loading...</p>}
+                    <div className='form-btn-group bg-primary'>
+                        <button className='form-btn text-white' >Login</button>
+                    </div>
+                    <p style={{ fontSize: '15px', 'textAlign': 'center' }} >Don't have an account ? <Link style={{ 'textDecoration': 'none' }} to="/signup" >Create New Account</Link> </p>
+                    <div className='divider-login-method' >
+                        <div></div>
+                        <p>or</p>
+                        <div></div>
+                    </div>
+                    <div className='form-btn-group' style={{ 'border': '1px solid rgba(149, 160, 167, 1)' }}>
+                        <FaGoogle className='signin-btn-logo' />
+                        <button className='form-btn'>Continue with Google</button>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 };
