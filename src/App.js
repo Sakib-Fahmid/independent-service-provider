@@ -7,6 +7,7 @@ import Helmet from 'react-helmet';
 import Login from './Components/Login/Login';
 import Notfound from './Components/Notfound/Notfound';
 import About from './Components/About/About';
+import Blogs from './Components/Blogs/Blogs';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<Home></Home>}></Route>
         <Route path='/login' element={<Login></Login>}></Route> 
         <Route path='/about' element={<About></About>}></Route> 
+        <Route path='/blogs' element={<Blogs></Blogs>}></Route>
         <Route path='*' element={<Notfound></Notfound>}></Route>
       </Routes>
       <Footer></Footer>
