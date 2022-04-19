@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { sendEmailVerification } from "firebase/auth";
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 
@@ -8,6 +9,7 @@ const Signup = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [customError, setCustomError] = useState("");
+    const [verificationEmailMessage, setVerificationEmailMessage] = useState("");
     const navigate = useNavigate();
 
     const [
@@ -40,6 +42,11 @@ const Signup = () => {
             setCustomError('Password cannot be less than six characters long');
             return;
         }
+        // email verification link sent 
+        sendEmailVerification(auth)
+            .then(() => {
+                setVerificationEmailMessage("Verification link sent to :", email);
+            });
         createUserWithEmailAndPassword(email, password);
     }
 
@@ -69,6 +76,7 @@ const Signup = () => {
                 </div>
             </div>
             <p className='text-danger text-center'>{error?.message ? error?.message : customError}</p>
+            <p>{verificationEmailMessage}</p>
             <div className='d-flex justify-content-center' >
                 <input className="bg-primary text-white rounded py-2 px-4 border-0" type="submit" id="submitBtn" value="Sign Up" />
             </div>

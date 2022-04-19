@@ -36,6 +36,7 @@ const Login = () => {
         signInWithGoogle();
     }
 
+    // if user logged in navigating to a different route from login route 
     if (user) navigate(from, { replace: true });
     if (user2) navigate(from, { replace: true });
 

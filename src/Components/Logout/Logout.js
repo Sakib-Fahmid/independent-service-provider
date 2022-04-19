@@ -5,7 +5,7 @@ const Logout = () => {
     signOut(auth);
     
     return (
-        <div className='p-5'>
+        <div style={{height:'400px'}}>
             <h1>You have been logged out</h1>
         </div>
     );
