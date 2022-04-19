@@ -9,6 +9,7 @@ import Notfound from './Components/Notfound/Notfound';
 import About from './Components/About/About';
 import Blogs from './Components/Blogs/Blogs';
 import Logout from './Components/Logout/Logout';
+import Signup from './Components/Signup/Signup';
 
 function App() {
   return (
@@ -19,8 +20,9 @@ function App() {
       <Header></Header>
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
-        <Route path='/login' element={<Login></Login>}></Route> 
-        <Route path='/about' element={<About></About>}></Route> 
+        <Route path='/login' element={<Login></Login>}></Route>
+        <Route path='/signup' element={<Signup></Signup>}></Route>
+        <Route path='/about' element={<About></About>}></Route>
         <Route path='/blogs' element={<Blogs></Blogs>}></Route>
         <Route path='/logout' element={<Logout></Logout>}></Route>
         <Route path='*' element={<Notfound></Notfound>}></Route>

@@ -1,66 +1,61 @@
-import React, { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import auth from '../../firebase.init';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import './Login.css';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaGoogle } from 'react-icons/fa';
-import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
 
 const Login = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
-
-    const [signInWithGoogle] = useSignInWithGoogle(auth);
+    const [
+        signInWithEmailAndPassword,
+        user,
+        loading,
+        error,] = useSignInWithEmailAndPassword(auth);
 
     const handleEmailBlur = e => {
-        // setEmail(e.target.value);
+        setEmail(e.target.value);
     }
 
     const handlePasswordBlur = e => {
-        // setPassword(e.target.value);
+        setPassword(e.target.value);
     }
 
-    const handleLoginSubmit = e => {
+    const handleFormSubmit = e => {
         e.preventDefault();
-        // signInWithEmailAndPassword(email, password);
+        signInWithEmailAndPassword(email, password);
+        navigate('/');
     }
-
-  
-    const handleLoginWithGoogle = () => {
-        signInWithGoogle();
-    }
-
     return (
-        <div className='form-container'>
-            <div>
-                <h1 className='login-form-title'>Login</h1>
-                <form onSubmit={handleLoginSubmit} >
-                    <div className='input-group'>
-                        <label className='label-input' htmlFor="email">Email</label>
-                        <br></br>
-                        <input onBlur={handleEmailBlur} className='input-field' type="email" name="email" id="" />
-                    </div>
-                    <div>
-                        <label className='label-input' htmlFor="password">Password</label>
-                        <br />
-                        <input onBlur={handlePasswordBlur} className='input-field' type="password" name="password" id="" />
-                    </div>
-                   
-                    <div className='form-btn-group bg-primary'>
-                        <button className='form-btn text-white' >Login</button>
-                    </div>
-                    <p style={{ fontSize: '15px', 'textAlign': 'center' }} >Don't have an account ? <Link style={{ 'textDecoration': 'none' }} to="/signup" >Create New Account</Link> </p>
-                    <div className='divider-login-method' >
-                        <div></div>
-                        <p>or</p>
-                        <div></div>
-                    </div>
-                    <div className='form-btn-group' style={{ 'border': '1px solid rgba(149, 160, 167, 1)' }}>
-                        <FaGoogle className='signin-btn-logo' />
-                        <button onClick={handleLoginWithGoogle} className='form-btn'>Continue with Google</button>
-                    </div>
-                </form>
+        <form onSubmit={handleFormSubmit} className='w-50 mx-auto border rounded px-4 py-5 mt-5'>
+            <div className='d-flex justify-content-center'>
+                <h1>Login</h1>
             </div>
-        </div>
+            <div className="mb-3 ">
+                <label htmlFor="inputEmail" className="col-form-label">Email</label>
+                <div className="">
+                    <input onBlur={handleEmailBlur} type="text" className="form-control" id="inputEmail" required />
+                </div>
+            </div>
+            <div className="mb-3">
+                <label htmlFor="inputPassword" className="col-form-label">Password</label>
+                <div className="">
+                    <input onBlur={handlePasswordBlur} type="password" className="form-control" id="inputPassword" required />
+                </div>
+            </div>
+            <p className='text-danger text-center'>{error?.message}</p>
+            <div className='d-flex justify-content-center' >
+                <input className="bg-primary text-white rounded py-2 px-4 border-0" type="submit" id="submitBtn" value="Login" />
+            </div>
+            <div className='d-flex justify-content-center m-3'>
+                <p>Yet to Sign up ? <Link to='/signup' className='text-decoration-none' > Create Account here </Link> </p>
+            </div>
+            <div className='d-flex justify-content-center' >
+                <button className='border-0 rounded d-flex align-items-center p-2'><FaGoogle className='m-2'></FaGoogle>Sign In With Google</button>
+            </div>
+        </form>
     );
 };
 
