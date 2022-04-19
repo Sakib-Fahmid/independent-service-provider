@@ -26,8 +26,10 @@ const Login = () => {
     const handleFormSubmit = e => {
         e.preventDefault();
         signInWithEmailAndPassword(email, password);
-        navigate('/');
     }
+
+    if (user) navigate('/');
+
     return (
         <form onSubmit={handleFormSubmit} className='w-50 mx-auto border rounded px-4 py-5 mt-5'>
             <div className='d-flex justify-content-center'>
