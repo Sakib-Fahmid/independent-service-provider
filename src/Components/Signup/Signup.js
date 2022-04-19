@@ -44,7 +44,6 @@ const Signup = () => {
     }
 
     if (user) navigate('/');
-    // if (error) setCustomError(error);
 
     return (
         <form onSubmit={handleFormSubmit} className='w-50 mx-auto border rounded px-4 py-5 mt-5'>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaGoogle } from 'react-icons/fa';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
@@ -8,6 +8,8 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+    let location = useLocation();
+    let from = location.state?.from?.pathname || "/";
 
     const [
         signInWithEmailAndPassword,
@@ -34,8 +36,8 @@ const Login = () => {
         signInWithGoogle();
     }
 
-    if (user) navigate('/');
-    if (user2) navigate('/');
+    if (user) navigate(from, { replace: true });
+    if (user2) navigate(from, { replace: true });
 
     return (
         <div className='w-50 mx-auto border rounded px-4 py-5 mt-5'>
