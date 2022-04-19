@@ -28,7 +28,7 @@ const Faq = () => {
             <div className="accordion-item">
                 <h2 className="accordion-header" id="flush-headingThree">
                     <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                        Can I learn German from me online ?
+                        Can I learn German from you online ?
                     </button>
                 </h2>
                 <div id="flush-collapseThree" className="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
